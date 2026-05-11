@@ -3,7 +3,7 @@ import type { CaseStudy, ComparisonRow, ContactInfo, FaqItem, HeroStat, NavLink,
 export const SITE = {
   name: 'LSS — Local Systems Studio',
   shortName: 'LSS',
-  url: 'https://localsystemsstudio.com',
+  url: 'https://lsslocalsystemsstudio.com',
   title: 'Sistema Integral de Captación Local en México | LSS',
   description: 'LSS instala sistemas integrales para que tu negocio sea encontrado, entendido y contactado. Método CEC: Claridad, Evidencia y Contacto.',
 };
@@ -11,7 +11,7 @@ export const SITE = {
 export const CONTACT: ContactInfo = {
   whatsapp: '+52 833 326 3389',
   whatsappUrl: 'https://wa.me/528333263389?text=Quiero%20agendar%20un%20diagn%C3%B3stico%20de%20captaci%C3%B3n%20con%20LSS',
-  email: 'localsystemsstudio@gmail.com',
+  email: 'contacto@lsslocalsystemsstudio.com',
   location: 'México / remoto',
   phone: '+52 833 326 3389',
 };
