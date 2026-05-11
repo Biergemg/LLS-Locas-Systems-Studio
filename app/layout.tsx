@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter_Tight, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 import { SITE } from '@/data/content';
@@ -18,26 +19,32 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap' 
 });
 
+const siteUrl = 'https://www.lsslocalsystemsstudio.com';
+const siteTitle = 'LSS Local Systems Studio';
+const siteDescription = 'Sistema integral de captación local. Encontrado. Entendido. Contactado.';
+const ogImage = 'https://www.lsslocalsystemsstudio.com/og-image.png';
+const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(siteUrl),
   title: SITE.title,
   description: SITE.description,
-  alternates: { canonical: '/' },
+  alternates: { canonical: siteUrl },
   robots: { index: true, follow: true },
-  openGraph: { 
-    type: 'website', 
-    locale: 'es_MX', 
-    url: SITE.url, 
-    siteName: SITE.name, 
-    title: SITE.title, 
-    description: SITE.description, 
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: SITE.name }] 
+  openGraph: {
+    type: 'website',
+    locale: 'es_MX',
+    url: siteUrl,
+    siteName: siteTitle,
+    title: siteTitle,
+    description: siteDescription,
+    images: [{ url: ogImage, width: 1200, height: 630, alt: siteTitle }]
   },
-  twitter: { 
-    card: 'summary_large_image', 
-    title: SITE.title, 
-    description: SITE.description, 
-    images: ['/og-image.png'] 
+  twitter: {
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
+    images: [ogImage]
   },
 };
 
@@ -45,10 +52,28 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es-MX" className={`${interTight.variable} ${spaceGrotesk.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, websiteSchema, faqSchema]) }} 
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([localBusinessSchema, websiteSchema, faqSchema]) }}
         />
+        {metaPixelId ? (
+          <>
+            <Script id="meta-pixel" strategy="afterInteractive">
+              {`
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '${metaPixelId}');
+                fbq('track', 'PageView');
+              `}
+            </Script>
+          </>
+        ) : null}
         {children}
       </body>
     </html>

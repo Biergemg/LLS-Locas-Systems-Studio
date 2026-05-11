@@ -3,6 +3,11 @@
 import Logo from '@/components/ui/Logo';
 import { CONTACT } from '@/data/content';
 
+const socialLinks = [
+  { label: 'Instagram', href: 'https://www.instagram.com/lsslocalsystemsstudio' },
+  { label: 'Facebook', href: 'https://www.facebook.com/lsslocalsystemsstudio' },
+];
+
 export default function Footer() {
   return (
     <footer
@@ -46,6 +51,20 @@ export default function Footer() {
             >
               WhatsApp
             </a>
+            {socialLinks.map((social) => (
+              <a
+                key={social.href}
+                className="t-label"
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--fg2)', transition: 'color 0.15s ease' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--fg2)')}
+              >
+                {social.label}
+              </a>
+            ))}
           </div>
         </div>
 
